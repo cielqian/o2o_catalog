@@ -1,4 +1,10 @@
 version: '2'
+.catalog:
+  name: "greenplum_1"
+  version: "v0.0.1"
+  description: "public service for test."
+  uuid: public-0
+  minimum_rancher_version: v1.0.0
 services:
   soam-app-o2o-fault-push:
     scale: 1
