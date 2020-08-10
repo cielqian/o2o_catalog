@@ -63,13 +63,7 @@ services:
       strategy: none
       request_line: GET "/health" "HTTP/1.0"
       reinitializing_timeout: 60000
-  zuul:
-    scale: 1
-    start_on_create: true
   appo2o-gis-api:
-    scale: 1
-    start_on_create: true
-  eureka-server:
     scale: 1
     start_on_create: true
   soam-app-o2o-schedule:

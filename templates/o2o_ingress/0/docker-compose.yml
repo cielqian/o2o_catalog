@@ -1,0 +1,28 @@
+version: '2'
+services:
+  zuul:
+    image: reg.goplus.com:5000/goplus/apigateway:v1.187
+    environment:
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      DB_HOST: ${MYSQL_DB_HOST}
+      DB_PORT: '3306'
+      DB_NAME: ${MYSQL_DB_NAME}
+      DB_USERNAME: ${MYSQL_DB_USERNAME}
+      DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      SERVER_CONTEXT_PATH: /qdo2o/soam-app/
+    stdin_open: true
+    volumes:
+    - /root/.zuulssl/server-123.p12:/root/.zuulssl/server-123.p12
+    tty: true
+    ports:
+    - 30003:9443/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  eureka-server:
+    image: reg.goplus.com:5000/goplus/eureka-server:v1.23
+    stdin_open: true
+    tty: true
+    ports:
+    - 8764:8761/tcp
+    labels:
+      io.rancher.container.pull_image: always
