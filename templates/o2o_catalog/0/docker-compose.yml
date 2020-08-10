@@ -11,7 +11,7 @@ services:
   security:
     image: reg.goplus.com:5000/goplus/goplus-security-api:v1.26
     environment:
-      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
       DB_HOST: ${MYSQL_DB_HOST}
       DB_PORT: '3306'
       DB_NAME: ${MYSQL_DB_NAME}
@@ -26,7 +26,7 @@ services:
     image: reg.goplus.com:5000/soam/appo2o-ws:test
     environment:
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
       MXM_SERVER: https://54.222.193.150/am/file
       MYSQL_DB_HOST: ${MYSQL_DB_HOST}
       MYSQL_DB_NAME: ${MYSQL_DB_NAME}
@@ -54,7 +54,7 @@ services:
     environment:
       APPLICATION_NAME: soam-app-common-o2o
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
       MYSQL_DB_HOST: ${MYSQL_DB_HOST}
       MYSQL_DB_NAME: ${MYSQL_DB_NAME}
       MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
@@ -73,7 +73,7 @@ services:
       AREA_DELAY: '10'
       AUTO_EVALUATE: '7200'
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
       MXM_PUSH_SERVER: http://goplus.goldwind.com.cn:80/postman/push/do
       MXM_SERVER: https://54.222.193.150:443/am/file
       MYSQL_DB_HOST: ${MYSQL_DB_HOST}
@@ -93,7 +93,7 @@ services:
   zuul:
     image: reg.goplus.com:5000/goplus/apigateway:v1.187
     environment:
-      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
       DB_HOST: ${MYSQL_DB_HOST}
       DB_PORT: '3306'
       DB_NAME: ${MYSQL_DB_NAME}
@@ -113,7 +113,7 @@ services:
     environment:
       DEBUG_ENABLED: 'true'
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
       MYSQL_DB_HOST: ${MYSQL_DB_HOST}
       MYSQL_DB_NAME: ${MYSQL_DB_NAME}
       MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
