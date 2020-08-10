@@ -11,12 +11,12 @@ services:
   security:
     image: reg.goplus.com:5000/goplus/goplus-security-api:v1.26
     environment:
-      EUREKA_SERVER_LIST: http://10.32.16.123:8764/eureka/
-      DB_HOST: 10.1.248.147
+      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      DB_HOST: ${MYSQL_DB_HOST}
       DB_PORT: '3306'
-      DB_NAME: am_general_o2o_test
-      DB_PASSWORD: amdbadmin,
-      DB_USERNAME: am
+      DB_NAME: ${MYSQL_DB_NAME}
+      DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      DB_USERNAME: ${MYSQL_DB_USERNAME}
     stdin_open: true
     tty: true
     mem_reservation: 1048576000
@@ -26,12 +26,12 @@ services:
     image: reg.goplus.com:5000/soam/appo2o-ws:test
     environment:
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://10.32.16.123:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
       MXM_SERVER: https://54.222.193.150/am/file
-      MYSQL_DB_HOST: 10.1.248.147
-      MYSQL_DB_NAME: am_general_o2o_test
-      MYSQL_DB_PASSWORD: amdbadmin,
-      MYSQL_DB_USERNAME: am
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
       SYSTEM_CODE: test
     stdin_open: true
     tty: true
@@ -54,12 +54,12 @@ services:
     environment:
       APPLICATION_NAME: soam-app-common-o2o
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://10.32.16.123:8764/eureka/
-      MYSQL_DB_HOST: 10.1.248.147
-      MYSQL_DB_NAME: am_general_o2o_test
-      MYSQL_DB_PASSWORD: amdbadmin,
+      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
       MYSQL_DB_PORT: '3306'
-      MYSQL_DB_USERNAME: am
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
     stdin_open: true
     tty: true
     mem_reservation: 1048576000
@@ -73,13 +73,13 @@ services:
       AREA_DELAY: '10'
       AUTO_EVALUATE: '7200'
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://10.32.16.123:8764/eureka/
+      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
       MXM_PUSH_SERVER: http://goplus.goldwind.com.cn:80/postman/push/do
       MXM_SERVER: https://54.222.193.150:443/am/file
-      MYSQL_DB_HOST: 10.1.248.147
-      MYSQL_DB_NAME: am_general_o2o_test
-      MYSQL_DB_PASSWORD: amdbadmin,
-      MYSQL_DB_USERNAME: am
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
       O2O_PRESET_TIMES: '10'
       O2O_SCOPE_CUSTOM_TASK_REGULAR_DELAY_HOURS: '1'
       O2O_SCOPE_CUSTOM_TASK_REGULAR_DELAY_MINUTES: '30'
@@ -93,12 +93,12 @@ services:
   zuul:
     image: reg.goplus.com:5000/goplus/apigateway:v1.187
     environment:
-      EUREKA_SERVER_LIST: http://10.32.16.123:8764/eureka/
-      DB_HOST: 10.1.248.147
+      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      DB_HOST: ${MYSQL_DB_HOST}
       DB_PORT: '3306'
-      DB_NAME: am_general_o2o_test
-      DB_USERNAME: am
-      DB_PASSWORD: amdbadmin,
+      DB_NAME: ${MYSQL_DB_NAME}
+      DB_USERNAME: ${MYSQL_DB_USERNAME}
+      DB_PASSWORD: ${MYSQL_DB_PASSWORD}
       SERVER_CONTEXT_PATH: /qdo2o/soam-app/
     stdin_open: true
     volumes:
@@ -113,9 +113,11 @@ services:
     environment:
       DEBUG_ENABLED: 'true'
       EUREKA_ENABLED: 'true'
-      EUREKA_SERVER_LIST: http://10.32.16.123:8764/eureka/
-      MYSQL_DB_HOST: 10.1.248.147
-      MYSQL_DB_NAME: am_general_o2o_test
+      EUREKA_SERVER_LIST: http://eureka-server:8764/eureka/
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
       SYSTEM_CODE: test
       APP_NAME: soam-app-o2o-gis
     stdin_open: true
@@ -134,10 +136,10 @@ services:
     image: reg.goplus.com:5000/soam/appo2o-schedule:test
     environment:
       MXM_SERVER: https://54.222.193.150/am/file
-      MYSQL_DB_HOST: 10.1.248.147
-      MYSQL_DB_NAME: am_general_o2o_test
-      MYSQL_DB_PASSWORD: amdbadmin,
-      MYSQL_DB_USERNAME: am
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
       SYSTEM_CODE: test
     stdin_open: true
     tty: true

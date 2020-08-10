@@ -5,6 +5,35 @@ version: '2'
   description: "public service for o2o test"
   uuid: public-0
   minimum_rancher_version: v1.0.0
+questions:
+  - variable: "MYSQL_DB_HOST"
+    label: "MYSQL DB HOST"
+    description: |
+        Enter your db host.
+    required: true
+    type: "string"
+    default: "10.1.248.147"
+  - variable: "MYSQL_DB_NAME"
+    label: "MYSQL DB NAME"
+    description: |
+        Enter your db name.
+    required: true
+    type: "string"
+    default: "am_general_o2o_test"
+  - variable: "MYSQL_DB_PASSWORD"
+    label: "MYSQL DB PASSWORD"
+    description: |
+        Enter your db password.
+    required: true
+    type: "string"
+    default: "amdbadmin,"
+  - variable: "MYSQL_DB_USERNAME"
+    label: "MYSQL DB USERNAME"
+    description: |
+        Enter your db username.
+    required: true
+    type: "string"
+    default: "am"
 services:
   soam-app-o2o-fault-push:
     scale: 1

@@ -1,6 +1,6 @@
-name: GoPlus Test # Name of the Catalog Entry
+name: O2O Test # Name of the Catalog Entry
 description: |
-  GoPlus Test APPs
+  O2O Test
 version: # Version of the Catalog to be used
 category: # Category to be used for searching catalog entries
 maintainer: AM Team # The maintainer of the catalog entry
