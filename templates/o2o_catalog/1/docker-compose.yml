@@ -1,0 +1,148 @@
+version: '2'
+services:
+  soam-app-o2o-fault-push:
+    image: reg.goplus.com:5000/soam/soam-app-o2o-fault-push:test
+    stdin_open: true
+    tty: true
+    ports:
+    - 8067:8067/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  security:
+    image: reg.goplus.com:5000/goplus/goplus-security-api:v1.26
+    environment:
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      DB_HOST: ${MYSQL_DB_HOST}
+      DB_PORT: '3306'
+      DB_NAME: ${MYSQL_DB_NAME}
+      DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      DB_USERNAME: ${MYSQL_DB_USERNAME}
+    stdin_open: true
+    tty: true
+    mem_reservation: 1048576000
+    labels:
+      io.rancher.container.pull_image: always
+  soam-app-o2o-ws-api:
+    image: reg.goplus.com:5000/soam/appo2o-ws:test
+    environment:
+      EUREKA_ENABLED: 'true'
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      MXM_SERVER: https://54.222.193.150/am/file
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
+      SYSTEM_CODE: test
+    stdin_open: true
+    tty: true
+    ports:
+    - 9998:9998/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      service-name: soam-app-o2o-ws-test
+  soam-app-o2o-fe:
+    image: reg.goplus.com:5000/am/o2o-fe:test
+    stdin_open: true
+    tty: true
+    ports:
+    - 8935:80/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      service-name: soam-app-o2o-fe-test
+  app-common-o2o:
+    image: reg.goplus.com:5000/soam/appcommon:v1.29
+    environment:
+      APPLICATION_NAME: soam-app-common-o2o
+      EUREKA_ENABLED: 'true'
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_PORT: '3306'
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
+    stdin_open: true
+    tty: true
+    mem_reservation: 1048576000
+    labels:
+      io.rancher.container.pull_image: always
+  soam-app-o2o-web-api:
+    image: reg.goplus.com:5000/soam/appo2o:test.1.1.301
+    environment:
+      APP_NAME: soam-app-o2o
+      DEPART_DELAY: '5'
+      AREA_DELAY: '10'
+      AUTO_EVALUATE: '7200'
+      EUREKA_ENABLED: 'true'
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      MXM_PUSH_SERVER: http://goplus.goldwind.com.cn:80/postman/push/do
+      MXM_SERVER: https://54.222.193.150:443/am/file
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
+      O2O_PRESET_TIMES: '10'
+      O2O_SCOPE_CUSTOM_TASK_REGULAR_DELAY_HOURS: '1'
+      O2O_SCOPE_CUSTOM_TASK_REGULAR_DELAY_MINUTES: '30'
+      SYSTEM_CODE: test
+      APP_VERSION: -1-1-301
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      service-name: o2o-web-api-test
+  zuul:
+    image: reg.goplus.com:5000/goplus/apigateway:v1.187
+    environment:
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      DB_HOST: ${MYSQL_DB_HOST}
+      DB_PORT: '3306'
+      DB_NAME: ${MYSQL_DB_NAME}
+      DB_USERNAME: ${MYSQL_DB_USERNAME}
+      DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      SERVER_CONTEXT_PATH: /qdo2o/soam-app/
+    stdin_open: true
+    volumes:
+    - /root/.zuulssl/server-123.p12:/root/.zuulssl/server-123.p12
+    tty: true
+    ports:
+    - 30003:9443/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  appo2o-gis-api:
+    image: reg.goplus.com:5000/soam/appo2o-gis:test
+    environment:
+      DEBUG_ENABLED: 'true'
+      EUREKA_ENABLED: 'true'
+      EUREKA_SERVER_LIST: http://eureka-server:8761/eureka/
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      SYSTEM_CODE: test
+      APP_NAME: soam-app-o2o-gis
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  eureka-server:
+    image: reg.goplus.com:5000/goplus/eureka-server:v1.23
+    stdin_open: true
+    tty: true
+    ports:
+    - 8764:8761/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  soam-app-o2o-schedule:
+    image: reg.goplus.com:5000/soam/appo2o-schedule:test
+    environment:
+      MXM_SERVER: https://54.222.193.150/am/file
+      MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+      MYSQL_DB_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DB_USERNAME: ${MYSQL_DB_USERNAME}
+      SYSTEM_CODE: test
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      service-name: soam-app-o2o-ws-test

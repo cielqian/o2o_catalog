@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: "O2O"
-  version: "v1.1.301.1"
+  version: "v1.1.301.2"
   description: "public service for o2o test"
   uuid: public-0
   minimum_rancher_version: v1.0.0
