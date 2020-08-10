@@ -5,7 +5,7 @@ version: '2'
   description: "public service for o2o test"
   uuid: public-0
   minimum_rancher_version: v1.0.0
-questions:
+  questions:
   - variable: "MYSQL_DB_HOST"
     label: "MYSQL DB HOST"
     description: |
